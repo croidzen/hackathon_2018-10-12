@@ -1,0 +1,6 @@
+# ignore ide stuff
+.vscode/
+
+# ignore python stuff
+.__pycache__/
+*.pyc
