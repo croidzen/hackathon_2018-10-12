@@ -17,7 +17,7 @@ def write_entry_to_file(entry):
         file_writer.writerow([entry['timestamp'], entry['vehicle_id']]) #, entry['changed_state'], entry['new_state']])
 
 
-@app.route('/', methods=['POST'])
+@app.route('/api', methods=['POST'])
 def create_entry():
     # if not request.json in request.json:    #or not 'timestamp' or...
     #     abort(400)
@@ -33,11 +33,11 @@ def create_entry():
     }
     write_entry_to_file(entry)
     return jsonify({'entry': entry}), 201
-# curl -i -H "Content-Type: application/json" -X POST -d "{"""vehicle_id""": """12345"""}" http://localhost:5000/
-# curl -i -H "Content-Type: application/json" -X POST -d "{"""vehicle_id""": """12345"""}" https://blg-challenge.herokuapp.com/
+    # curl -i -H "Content-Type: application/json" -X POST -d "{"""vehicle_id""": """12345"""}" http://localhost:5000/api
+    # curl -i -H "Content-Type: application/json" -X POST -d "{"""vehicle_id""": """12345"""}" https://blg-challenge.herokuapp.com/api
 
 
-@app.route('/', methods=['GET'])
+@app.route('/api', methods=['GET'])
 def get_database():
     if os.path.exists('database.csv'):
         # with open('database.csv') as csv_file:
@@ -49,14 +49,18 @@ def get_database():
 
         entries = json.dumps(list(csv.reader(open('database.csv'))))
     return entries
+    # return jsonify({'result': True})
+    # curl -i http://localhost:5000/api
 
 
-@app.route('/', methods=['DELETE'])
+
+@app.route('/api', methods=['DELETE'])
 def delete_database():
     if os.path.exists('database.csv'):
         os.remove('database.csv')
     return jsonify({'result': True})
-# curl -i -H "Content-Type: application/json" -X DELETE -d "" http://localhost:5000/
+    # curl -i -H "Content-Type: application/json" -X DELETE -d "" http://localhost:5000/api
+
 
 if __name__ == '__main__':
     app.run(debug=True) 
