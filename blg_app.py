@@ -25,9 +25,9 @@ def create_entry():
 
     entry = {
         'timestamp': ts,
-        'vehicle_id': request.json['vehicle_id']
-        # 'changed_state': request.json['changed_state'],
-        # 'new_state': request.json['new_state']
+        'vehicle_id': request.json['vehicle_id'],
+        'changed_state': request.json['changed_state'],
+        'new_state': request.json['new_state']
     }
     write_entry_to_file(entry)
     return jsonify({'entry': entry}), 201
