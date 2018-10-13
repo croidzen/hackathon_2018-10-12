@@ -13,7 +13,7 @@ def hello_world():
 def write_entry_to_file(entry):
     with open('database.csv', mode='a+', newline='') as file:
         file_writer = csv.writer(file, delimiter='\t', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-        file_writer.writerow([entry['timestamp'], entry['vehicle_id']]) #, entry['changed_state'], entry['new_state']])
+        file_writer.writerow([entry['timestamp'], entry['vehicle_id'], entry['changed_state'], entry['new_state']])
 
 
 @app.route('/api', methods=['POST'])
