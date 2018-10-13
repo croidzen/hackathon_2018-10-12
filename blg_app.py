@@ -2,10 +2,10 @@ from flask import Flask, request, jsonify, abort
 import csv
 
 
-app = Flask(__name__)
+flask_app = Flask(__name__)
 
 
-@app.route('/')
+@flask_app.route('/')
 def hello_world():
     return 'This is the content'
 
@@ -17,7 +17,7 @@ def write_entry_to_file(entry):
         file_writer.writerow([entry['timestamp'], entry['vehicle_id']]) #, entry['changed_state'], entry['new_state']])
 
 
-@app.route('/', methods=['POST'])
+@flask_app.route('/', methods=['POST'])
 def create_entry():
     # if not request.json in request.json:    #or not 'timestamp' or...
     #     abort(400)
@@ -33,4 +33,4 @@ def create_entry():
 
 
 if __name__ == '__main__':
-    app.run(debug=True) 
+    flask_app.run(debug=True) 
