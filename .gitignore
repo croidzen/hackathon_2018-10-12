@@ -4,3 +4,6 @@
 # ignore python stuff
 .__pycache__/
 *.pyc
+
+# data
+*.csv
