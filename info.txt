@@ -1,0 +1,3 @@
+(hackathon) C:\Users\marti\Dev\hackathon_2018-10-12>heroku create blg-challenge
+Creating ⬢ blg-challenge... done
+https://blg-challenge.herokuapp.com/ | https://git.heroku.com/blg-challenge.git
