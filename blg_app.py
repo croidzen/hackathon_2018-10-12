@@ -42,7 +42,7 @@ def delete_database():
     if os.path.exists('database.csv'):
         os.remove('database.csv')
     return jsonify({'result': True})
-# curl -i -H "Content-Type: application/json" -X DELETE -d http://localhost:5000/
+# curl -i -H "Content-Type: application/json" -X DELETE -d "" http://localhost:5000/
 
 if __name__ == '__main__':
     app.run(debug=True) 
