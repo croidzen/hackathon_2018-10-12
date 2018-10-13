@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, abort
-import csv, datetime, os
+import csv, datetime, os, json
 
 
 app = Flask(__name__)
@@ -35,6 +35,20 @@ def create_entry():
     return jsonify({'entry': entry}), 201
 # curl -i -H "Content-Type: application/json" -X POST -d "{"""vehicle_id""": """12345"""}" http://localhost:5000/
 # curl -i -H "Content-Type: application/json" -X POST -d "{"""vehicle_id""": """12345"""}" https://blg-challenge.herokuapp.com/
+
+
+@app.route('/', methods=['GET'])
+def get_database():
+    if os.path.exists('database.csv'):
+        # with open('database.csv') as csv_file:
+        #     csv_reader = csv.reader(csv_file, delimiter='\t')
+        #     for row in csv_reader:
+        #         print(f'\t{row[0]} works in the {row[1]} department, and was born in {row[2]}.')
+        #         for each value in row:    
+        #             print(f'Processed {line_count} lines.')
+
+        entries = json.dumps(list(csv.reader(open('database.csv'))))
+    return entries
 
 
 @app.route('/', methods=['DELETE'])
