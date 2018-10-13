@@ -1,4 +1,7 @@
 from flask import Flask, request, jsonify, abort
+import csv
+
+
 app = Flask(__name__)
 
 
@@ -8,10 +11,10 @@ def hello_world():
 
 
 def write_entry_to_file(entry):
-    file = open('database.txt','w') 
-    file.write('success!')
-    # file.write(entry['timestamp'], '\t', entry['vehicle_id']) #, '\t', entry['changed_state'], '\t', entry['new_state'])
-    file.close() 
+    with open('database.csv', mode='a', newline='') as file:
+        file_writer = csv.writer(file, delimiter='\t', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+        # file_writer.writerow(['Success!'])
+        file_writer.writerow([entry['timestamp'], entry['vehicle_id']]) #, entry['changed_state'], entry['new_state']])
 
 
 @app.route('/', methods=['POST'])
