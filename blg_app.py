@@ -13,7 +13,6 @@ def hello_world():
 def write_entry_to_file(entry):
     with open('database.csv', mode='a+', newline='') as file:
         file_writer = csv.writer(file, delimiter='\t', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-        # file_writer.writerow(['Success!'])
         file_writer.writerow([entry['timestamp'], entry['vehicle_id']]) #, entry['changed_state'], entry['new_state']])
 
 
@@ -21,7 +20,6 @@ def write_entry_to_file(entry):
 def create_entry():
     # if not request.json in request.json:    #or not 'timestamp' or...
     #     abort(400)
-    
     dt = datetime.datetime.now()
     ts = str(dt.year) + '-' + str(dt.month)+ '-' + str(dt.day)+ '_' + str(dt.hour)+ ':' + str(dt.minute)+ ':' + str(dt.second)
 
@@ -40,18 +38,12 @@ def create_entry():
 @app.route('/api', methods=['GET'])
 def get_database():
     if os.path.exists('database.csv'):
-        # with open('database.csv') as csv_file:
-        #     csv_reader = csv.reader(csv_file, delimiter='\t')
-        #     for row in csv_reader:
-        #         print(f'\t{row[0]} works in the {row[1]} department, and was born in {row[2]}.')
-        #         for each value in row:    
-        #             print(f'Processed {line_count} lines.')
-
         entries = json.dumps(list(csv.reader(open('database.csv'))))
-    return entries
-    # return jsonify({'result': True})
+        return entries
+    else:
+        return jsonify({'result': False})
     # curl -i http://localhost:5000/api
-
+    # curl -i https://blg-challenge.herokuapp.com/api
 
 
 @app.route('/api', methods=['DELETE'])
@@ -60,7 +52,7 @@ def delete_database():
         os.remove('database.csv')
     return jsonify({'result': True})
     # curl -i -H "Content-Type: application/json" -X DELETE -d "" http://localhost:5000/api
-
+    # curl -i -H "Content-Type: application/json" -X DELETE -d "" https://blg-challenge.herokuapp.com/api  
 
 if __name__ == '__main__':
     app.run(debug=True) 
