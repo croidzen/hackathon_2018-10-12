@@ -7,7 +7,13 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    if os.path.exists('database.csv'):
+        reader = csv.reader(open('database.csv', 'r'))
+        d = {}
+        for row in reader:
+            k, v = row
+            d[k] = v
+    return render_template('index.html', result=d)
 
 
 
