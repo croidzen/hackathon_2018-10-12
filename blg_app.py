@@ -6,8 +6,9 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def hello_world():
-    return 'This is the content'
+def index():
+    return render_template(‘website\index.html’)
+
 
 
 def write_entry_to_file(entry):
