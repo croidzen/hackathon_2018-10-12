@@ -34,7 +34,7 @@ def index():
 
     #     return my_html
     # else:
-        return 'BLG-Challenge Hackathon Bremen 2.0'
+    return 'BLG-Challenge Hackathon Bremen 2.0'
 
 
 
