@@ -14,26 +14,27 @@ def index():
             k, v = row
             d[k] = v
 
-    keys = d.keys()
-    length = len(d[keys[0]])
+        keys = d.keys()
+        length = len(d[keys[0]])
 
-    items = ['<table style="width:300px">', '<tr>']
-    for k in keys:
-        items.append('<td>%s</td>' % k)
-    items.append('</tr>')
-
-    for i in range(length):
-        items.append('<tr>')
+        items = ['<table style="width:300px">', '<tr>']
         for k in keys:
-            items.append('<td>%s</td>' % d[k][i])
+            items.append('<td>%s</td>' % k)
         items.append('</tr>')
 
-    items.append('</table>')
+        for i in range(length):
+            items.append('<tr>')
+            for k in keys:
+                items.append('<td>%s</td>' % d[k][i])
+            items.append('</tr>')
 
-    my_html = '\n'.join(items)
+        items.append('</table>')
 
-    return my_html
-    # return 'BLG-Challenge Hackathon Bremen 2.0'
+        my_html = '\n'.join(items)
+
+        return my_html
+    else:
+        return 'BLG-Challenge Hackathon Bremen 2.0'
 
 
 
